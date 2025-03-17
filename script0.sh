@@ -305,7 +305,7 @@ fi
 CERT_NODE_PASSWORD=${NODES["$CERT_NODE_IP"]}
 echo "Generating certs on $CERT_NODE_IP..."
 
-CERT_PASSWORD="lolchangeme"
+CERT_PASSWORD="changeme"
 
 echo "Checking for existing certs..."
 CERTS_EXIST=$(sshpass -p "$CERT_NODE_PASSWORD" ssh -o StrictHostKeyChecking=no "$CERT_NODE_IP" 'if [ -f /home/elasticsearch/config/certs/elastic-stack-ca.p12 ] && [ -f /home/elasticsearch/config/certs/elastic-certificates.p12 ]; then echo "yes"; else echo "no"; fi')
