@@ -423,8 +423,8 @@ run_command "sshpass -p \"$LAST_NODE_PASSWORD\" ssh -o StrictHostKeyChecking=no 
 # Restart and wait
 run_command "sshpass -p \"$LAST_NODE_PASSWORD\" ssh -o StrictHostKeyChecking=no $LAST_NODE_IP 'sudo systemctl restart elasticsearch'"
 
-echo "waiting 160s for last node restart"
-sleep 160
+echo "waiting 180s for last node restart"
+sleep 180
 FIRST_NODE_PASSWORD=${NODES["${NODE_IPS[0]}"]}
 FIRST_OUTPUT=$(sshpass -p "$FIRST_NODE_PASSWORD" ssh -o StrictHostKeyChecking=no ${NODE_IPS[0]} "sudo -u elasticsearch /home/elasticsearch/bin/elasticsearch-setup-passwords interactive 2>&1" || echo "command failed")
 if [[ "$FIRST_OUTPUT" == *"has already been changed"* ]]; then
@@ -589,7 +589,7 @@ run_command "sshpass -p '$KIBANA_SSH_PASSWORD' ssh -o StrictHostKeyChecking=no $
 run_command "sshpass -p '$KIBANA_SSH_PASSWORD' ssh -o StrictHostKeyChecking=no $KIBANA_IP 'sudo systemctl stop kibana 2>/dev/null || echo \"kibana isn't running\"'"
 sleep 10
 run_command "sshpass -p '$KIBANA_SSH_PASSWORD' ssh -o StrictHostKeyChecking=no $KIBANA_IP 'sudo systemctl start kibana'"
-sleep 50
+sleep 60
 run_command "sshpass -p '$KIBANA_SSH_PASSWORD' ssh -o StrictHostKeyChecking=no $KIBANA_IP 'sudo systemctl status kibana --no-pager || echo \"failed but maybe still just starting\"'"
 run_command "sshpass -p '$KIBANA_SSH_PASSWORD' ssh -o StrictHostKeyChecking=no $KIBANA_IP 'sudo systemctl enable kibana'"
 echo -e "\n\n========== YOUR SUMMARY ==========\n"
